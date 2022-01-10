@@ -1,0 +1,14 @@
+name: License
+on:
+  push:
+    branches: [master]
+jobs:
+  licenses:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: tradeshift/cdxgen-action@main
+        with:
+          server_url: https://license-server.eu-west-1.test.ts.sv/api/v1/bom
+          token: ${{ secrets.LICENSESERVER_TOKEN }}
+          fetch_licenses: "true"

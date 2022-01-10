@@ -6,6 +6,7 @@ metadata:
   description: React components and storybook for Tradeshift UI
   annotations:
     github.com/project-slug: tradeshift/react-tradeshift-ui
+    sonarqube.org/project-key: react-tradeshift-ui # Name of the project in SonarQube
 spec:
   type: library
   lifecycle: production
