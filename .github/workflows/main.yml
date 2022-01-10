@@ -26,6 +26,21 @@ jobs:
       - name: npm test
         run: npm test -- --coverage --collectCoverageFrom=src/components/**/*.js
 
+  sonar:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: tradeshift/actions-sonarqube@v2
+        continue-on-error: true
+        with:
+          ca-cert: ${{ secrets.MTLS_CACERT }}
+          client-cert: ${{ secrets.MTLS_CERT }}
+          client-key: ${{ secrets.MTLS_KEY }}
+          token: ${{ secrets.SONAR_TOKEN }}
+
   release:
     name: 🚀 Release
     needs: [validate]
