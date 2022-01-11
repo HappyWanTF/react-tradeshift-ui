@@ -8,7 +8,7 @@ jobs:
     # This job only runs for pull request comments
     name: PR comment
     if: github.event.comment.body == 'npm publish'
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: 👍 Acknowledge
         uses: actions/github-script@0.3.0
