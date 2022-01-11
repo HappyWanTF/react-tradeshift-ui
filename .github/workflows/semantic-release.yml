@@ -1,59 +1,23 @@
 name: Semantic release
-on:
-  pull_request:
-  push:
-    branches:
-      - master
+on: [pull_request]
 
 jobs:
   semantic-release:
     runs-on: ubuntu-latest
-    # if: ${{ !github.event.fork &&
-    #   contains('refs/heads/master,refs/heads/beta,refs/heads/next,refs/heads/alpha',
-    #   github.ref) && github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v2
-        # with:
-        #   fetch-depth: 0
-      - name: 🚀 Dry run release
-        uses: tradeshift/actions-semantic-release@v1
         with:
-          # branches: |
-          #   [
-          #     '+([0-9])?(.{+([0-9]),x}).x',
-          #     'master',
-          #     'next',
-          #     'next-major',
-          #     {name: 'beta', prerelease: true},
-          #     {name: 'alpha', prerelease: true}
-          #   ]
-          # registry: https://npm.pkg.github.com/
-          # Dry run and publish the changelog as a Check
-          registry: https://npm.pkg.github.com/
+          fetch-depth: 0
+      - name: Dry-run release
+        uses: tradeshift/actions-semantic-release@v1
+        id: semantic-release
+        with:
+          branches: |
+            [
+              'master'
+            ]
           dry_run: true
           check_name: Semantic release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN_PUBLIC }}
-    # steps:
-    #   - uses: actions/checkout@v2
-    #     with:
-    #       fetch-depth: 0
-    #   - name: Dry-run release
-    #     uses: tradeshift/actions-semantic-release@v1
-    #     id: semantic-release
-    #     with:
-    #       npm_publish: false
-    #       dry_run: true
-    #       check_name: Semantic release
-    #     env:
-    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #       NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN_PUBLIC }}
-
-  # semantic-release-dry-run:
-  #   name: semantic-release dry-run
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         fetch-depth: 0
-  #     run: GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} npx semantic-release --dry-run.
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
