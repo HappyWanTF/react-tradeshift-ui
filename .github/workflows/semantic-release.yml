@@ -29,11 +29,12 @@ jobs:
           #   ]
           # registry: https://npm.pkg.github.com/
           # Dry run and publish the changelog as a Check
+          registry: https://npm.pkg.github.com/
           dry_run: true
           check_name: Semantic release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN_PUBLIC }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN_PUBLIC }}
     # steps:
     #   - uses: actions/checkout@v2
     #     with:
