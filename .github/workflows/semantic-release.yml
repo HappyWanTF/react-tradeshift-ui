@@ -4,6 +4,9 @@ on: [pull_request]
 jobs:
   semantic-release:
     runs-on: ubuntu-latest
+    if: ${{ !github.event.fork &&
+      contains('refs/heads/master,refs/heads/beta,refs/heads/next,refs/heads/alpha',
+      github.ref) && github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v2
         with:
