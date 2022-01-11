@@ -12,6 +12,9 @@ jobs:
     #   contains('refs/heads/master,refs/heads/beta,refs/heads/next,refs/heads/alpha',
     #   github.ref) && github.event_name == 'push' }}
     steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: 🚀 Dry run release
         uses: tradeshift/actions-semantic-release@v1
         with:
